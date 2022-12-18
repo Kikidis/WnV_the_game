@@ -1,4 +1,4 @@
-//this are our libraries for the game  
+//this is our libraries file for the game  
 
 #include <iostream>
 #include <ctime>
