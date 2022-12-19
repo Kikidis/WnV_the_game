@@ -3,3 +3,6 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <map>
+#include <utility>
+#include <string.h>
