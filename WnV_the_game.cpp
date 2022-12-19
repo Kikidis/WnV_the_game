@@ -1,41 +1,33 @@
 #include "libraries.h"
 using namespace std;
-
-class Point
-{
-    public:
-        int x, y;
-};
-
+using std::vector;
 
 
 class map{
 
     private:
-       int x,y;
-
+        int x,y;
+        vector<vector<int> > my2DArray;
 
     public:
         //constructor for the length and width
-        map(int a, int b){
+        map(int a,int b){
         cout<<"Please type the length of the map from 0-10"<<endl<<"L:";
         cin>>a;
-        if (a<0 || a>10){
-            cout<<"Try again...";
-            cin>>a;
-        }
-
         cout<<"Please type the width of the map from 0-10"<<endl<<"W:";
         cin>>b;
-        if (b<0 || b>10){
-            cout<<"Try again...";
-            cin>>b;
-        }
 
-        x=a;
-        y=b;
+        my2DArray.resize(a);
+        for (int i = 0; i < a; ++i)
+            my2DArray[i].resize(b);
+
+
         }
-        
+        a=x;
+        b=y;
+
+        // De-Constructor
+        ~map(){} 
 };
 
 
@@ -114,7 +106,17 @@ class power{
 
 int main(){
 
-    map <x,y> field;
+    my2DArray[Length][Width];
+    cout<<"Type the teammates you want to have, V for vampires/ W for werewolves "<<endl;
+    char team;
+    cin>>team;
+    if (team =='V'){
+        vampires x;
+    }
+    else{
+        werewolves x;
+    }
+
 
     return 0;
 
