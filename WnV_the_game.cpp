@@ -62,6 +62,30 @@ class avatar{
     public:
 };
 
+
+class earth{
+    
+    private:
+
+    public:
+};
+
+
+class water{
+    
+    private:
+
+    public:
+};
+
+class trees{
+
+    private:
+
+    public:
+};
+
+
 class health{
     
     private:
@@ -90,7 +114,7 @@ class power{
 
 int main(){
 
-    map<x, y> tm;
+    map <x,y> field;
 
     return 0;
 
