@@ -21,10 +21,10 @@ class map{
         for (int i = 0; i < a; ++i)
             my2DArray[i].resize(b);
 
-
-        }
         a=x;
         b=y;
+        }
+
 
         // De-Constructor
         ~map(){} 
