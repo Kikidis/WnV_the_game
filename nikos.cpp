@@ -55,28 +55,6 @@ class avatar{
 };
 
 
-class earth{
-    
-    private:
-
-    public:
-};
-
-
-class water{
-    
-    private:
-
-    public:
-};
-
-class trees{
-
-    private:
-
-    public:
-};
-
 
 class health{
     
@@ -106,15 +84,21 @@ class power{
 
 int main(){
 
-    my2DArray[Length][Width];
+    
+    map obj;
+    obj.map();
+    
     cout<<"Type the teammates you want to have, V for vampires/ W for werewolves "<<endl;
     char team;
     cin>>team;
     if (team =='V'){
         vampires x;
     }
-    else{
+    else if(team =='W'){
         werewolves x;
+    }
+    else{
+        return 0;
     }
 
 
