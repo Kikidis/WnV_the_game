@@ -5,32 +5,44 @@ using namespace std;
 //class avatar
 class Avatar {
 public:
-    Avatar(int x, int y);
+    int x,y,i,j,health,power,filter,defence;
+    char** map;
+    char** gamemap;
+
+    int Start(){
+        srand((int)time(0));
+        
+        filter=rand()%2;
+        power=(rand()%2)+1;
+        health=5;
+        defence=(rand()%1)+1;
+    }
 
     int move(){   
-        // Get user input (W-A-S-D)
+        // Get user input (W-A-S-D) 
         cout << "Use W-S-A-D to move " <<endl;
         char input;
         cin >> input;
-        int i,j;
-        char** map;
-        char** gamemap;
         if (input == 'w' || input == 'W') {
             // Move the avatar up
-            gamemap[i+1][j];
+            if(map[i+1][j]=='e'&& gamemap[i+1][j]!='o')
+                gamemap[i+1][j];
         }
         else if (input == 's'|| input == 'S') {
             // Move the avatar down
-            gamemap[i-1][j];
+            if(map[i-1][j]=='e'&& gamemap[i-1][j]!='o')
+                gamemap[i-1][j];
         }
         else if (input == 'a'|| input == 'A') {
             // Move the avatar left
-            gamemap[i][j-1];
+            if(map[i][j-1]=='e'&& gamemap[i][j-1]!='o')
+                gamemap[i][j-1];
 
         }
         else if (input == 'd'|| input == 'D') {
             // Move the avatar right
-            gamemap[i][j+1];
+            if(map[i][j]+1=='e'&& gamemap[i][j+1]!='o')
+                gamemap[i][j+1];
 
         }
         else if (input == 'h') {
@@ -48,7 +60,6 @@ public:
             cout << "Invalid command" << endl;
         }
     }
-
 
 };
 
@@ -151,7 +162,7 @@ class vampire{
     }
 
     private:
-        int x,y;
+        int x_,y_;
 };
 
 
@@ -216,14 +227,27 @@ class werewolf{
     }
 
     private:
-        int x,y;
+        int x_,y_;
 };
 
+
+//keep playing or quit the game class 
+void game(){
+    cout<<"Do you want to keep playing?(Y/N)"<<endl;
+    char input;
+    cin>>input;
+    if(input=='N'|| input=='n')          
+        cout<<"exitig..."<<endl;
+        
+    else if (input=='q')            
+        cout<<"exitig..."<<endl;
+        
+}
 
 int main(){
     int x, y, i, j, maxplayers, earth, water, tree, current, temp, vampires, werewolfs, filter;
     long curtime;
-    time_t ti = time(NULL);
+    //time_t ti = time(NULL);
     char ch;
 
     cout<<"Choose two possitive numbers for the map[x.y]\n";
@@ -246,7 +270,8 @@ int main(){
         earth++;            //σε περίπτωση που (x*y)/4 αφήνει υπόλοιπο αυξάνουμε το πεδίο της γης κατά ένα
     }
 
-    srand (ti);
+    //srand (ti);
+    srand((int)time(0));
 
     for(i=0; i<x; i++){     //αρχικοποιούμε τον πίκανα του χάρτη με το o
         for(j=0; j<y; j++){
@@ -296,6 +321,19 @@ int main(){
         }
     }
 
+    int avatar=1;
+    while(avatar){          //τοποθετούμε το Avatar σε τυχαία θέση στον χάρτη
+        for(i=0; i<x; i++){
+            for(j=0; j<y; j++){
+                current=rand();
+                temp=current%(x+y);
+                if(((i+j)==temp) && (avatar!=0) && (map[i][j]=='e')){
+                    gamemap[i][j]='A';
+                    avatar--;
+                }
+            }
+        }
+    }
     vampires=maxplayers;
     while(vampires){        //τοποθετούμε το V σε τυχαία θέση στον χάρτη
         for(i=0; i<x; i++){
@@ -309,8 +347,6 @@ int main(){
             }
         }
     }
-
-
     werewolfs=maxplayers;
     while(werewolfs){       //τοποθετούμε το W σε τυχαία θέση στον χάρτη
         for(i=0; i<x; i++){
@@ -324,7 +360,6 @@ int main(){
             }
         }
     }
-
 
     filter=1;
     while(filter){          //τοποθετούμε το φίλτρο σε τυχαία θέση στον χάρτη
@@ -351,14 +386,33 @@ int main(){
         cout<<"\n";
     }
 
+    werewolf obj1;
+    obj1.Start();
+    vampire obj2;
+    obj2.Start();
+    Avatar obj;
+    obj.Start();
+while(true){
+    obj.move();
+    obj1.move();
+    obj2.move();     
 
+    for(i=0; i<x; i++){     //εμαφανίζουμε τον πίκανα του χάρτη
+        for(j=0; j<y; j++){
+            cout<<map[i][j]<<" ";
+        }
+        cout<<"\t";
+        for(j=0; j<y; j++){
+            cout<<gamemap[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    // Alternate between day and night
+    static bool is_day = true;
+    is_day = !is_day;
 
-
-
-
+}
+    game();
 
     return 0;
 }
-
-
-

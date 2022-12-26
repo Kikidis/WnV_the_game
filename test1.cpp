@@ -5,31 +5,34 @@ using namespace std;
 //class avatar
 class Avatar {
 public:
-    Avatar(int x, int y);
-
+    int i,j,health,power,filter,defence;
+    char** map;
+    char** gamemap;
     int move(){   
         // Get user input (W-A-S-D)
         cout << "Use W-S-A-D to move " <<endl;
         char input;
         cin >> input;
-        Themap themap;
-        int i,j;
         if (input == 'w' || input == 'W') {
             // Move the avatar up
-            themap.gamemap[i+1][j];
+            if(map[i+1][j]=='e'&& gamemap[i+1][j]!='o')
+                gamemap[i+1][j];
         }
         else if (input == 's'|| input == 'S') {
             // Move the avatar down
-            themap.gamemap[i-1][j];
+            if(map[i-1][j]=='e'&& gamemap[i-1][j]!='o')
+                gamemap[i-1][j];
         }
         else if (input == 'a'|| input == 'A') {
             // Move the avatar left
-            themap.gamemap[i][j-1];
+            if(map[i][j-1]=='e'&& gamemap[i][j-1]!='o')
+                gamemap[i][j-1];
 
         }
         else if (input == 'd'|| input == 'D') {
             // Move the avatar right
-            themap.gamemap[i][j+1];
+            if(map[i][j]+1=='e'&& gamemap[i][j+1]!='o')
+                gamemap[i][j+1];
 
         }
         else if (input == 'h') {
@@ -150,7 +153,7 @@ class vampire{
     }
 
     private:
-
+        int x_,y_;
        
 
 };
@@ -216,7 +219,7 @@ class werewolf{
     }
 
     private:
-       int x,y; 
+       int x_,y_; 
 };
 
 //class Themap
