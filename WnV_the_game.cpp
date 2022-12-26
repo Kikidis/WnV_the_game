@@ -12,7 +12,7 @@ public:
     int Start(){
         srand((int)time(0));
         
-        filter=rand()%2;
+        filter=1;
         power=(rand()%2)+1;
         health=5;
         defence=(rand()%1)+1;
@@ -25,25 +25,35 @@ public:
         cin >> input;
         if (input == 'w' || input == 'W') {
             // Move the avatar up
-            if(map[i+1][j]=='e'&& gamemap[i+1][j]!='o')
-                gamemap[i+1][j];
+            if(map[i+1][j]=='e' && gamemap[i+1][j]=='o'){
+                int temp=gamemap[i][j];
+                gamemap[i][j]='o';
+                gamemap[i+1][j]=temp;
+            }
         }
         else if (input == 's'|| input == 'S') {
             // Move the avatar down
-            if(map[i-1][j]=='e'&& gamemap[i-1][j]!='o')
-                gamemap[i-1][j];
+            if(map[i-1][j]=='e'&& gamemap[i-1][j]=='o'){
+                int temp=gamemap[i][j];
+                gamemap[i][j]='o';
+                gamemap[i-1][j]=temp;
+            }
         }
         else if (input == 'a'|| input == 'A') {
             // Move the avatar left
-            if(map[i][j-1]=='e'&& gamemap[i][j-1]!='o')
-                gamemap[i][j-1];
-
+            if(map[i][j-1]=='e'&& gamemap[i][j-1]=='o'){
+                int temp=gamemap[i][j];
+                gamemap[i][j]='o';
+                gamemap[i][j-1]=temp;
+            }         
         }
         else if (input == 'd'|| input == 'D') {
             // Move the avatar right
-            if(map[i][j]+1=='e'&& gamemap[i][j+1]!='o')
-                gamemap[i][j+1];
-
+            if(map[i][j]+1=='e'&& gamemap[i][j+1]=='o'){
+                int temp=gamemap[i][j];
+                gamemap[i][j]='o';
+                gamemap[i][j+1]=temp;
+            }
         }
         else if (input == 'h') {
             // Display help message
@@ -73,7 +83,6 @@ class vampire{
     int Start(){
         srand((int)time(0));
         
-        filter=rand()%2;
         power=(rand()%2)+1;
         health=5;
         defence=(rand()%1)+1;
@@ -172,67 +181,67 @@ class werewolf{
         int x,y,i,j,health,power,filter,defence;
         char** map;
         char** gamemap;
+
     int Start(){
             srand((int)time(0));
             
-            int filter=rand()%2;
             int power=(rand()%2)+1;
-            int hp=5;
+            int health=5;
             int defence=(rand()%1)+1;
     }
     int move(){
         
         srand((int)time(0));
         while(health){
-        int current=rand();
-        int temp=(current%4)+1;
-        if(temp==1){       //κίνηση επάνω
-            if(i==0){
-                break;
+            int current=rand();
+            int temp=(current%4)+1;
+            if(temp==1){       //κίνηση επάνω
+                if(i==0){
+                    break;
+                }
+                else if(map[i-1][j]=='e' && (gamemap[i-1][j]=='o')){
+                    gamemap[i-1][j]==gamemap[i][j];
+                    gamemap[i][j]='o';
+                }
             }
-            else if(map[i-1][j]=='e' && (gamemap[i-1][j]=='o')){
-                gamemap[i-1][j]==gamemap[i][j];
-                gamemap[i][j]='o';
+            if(temp==2){        //κίνηση αριστερά
+                if(j==0){
+                    break;
+                }
+                else if(map[i][j-1]=='e' && (gamemap[i][j-1]=='o')){
+                    gamemap[i][j-1]==gamemap[i][j];
+                    gamemap[i][j]='o';
+                }
             }
-        }
-        if(temp==2){        //κίνηση αριστερά
-            if(j==0){
-                break;
+            if(temp==3){        //κίνηση δεξιά
+                if(j==y){
+                    break;
+                }
+                else if(map[i][j+1]=='e' && (gamemap[i][j+1]=='o')){
+                    gamemap[i][j+1]==gamemap[i][j];
+                    gamemap[i][j]='o';
+                }
             }
-            else if(map[i][j-1]=='e' && (gamemap[i][j-1]=='o')){
-                gamemap[i][j-1]==gamemap[i][j];
-                gamemap[i][j]='o';
+            if(temp==4){        //κίνηση κάτω
+                if(i==x){
+                    break;
+                }
+                else if(map[i+1][j]=='e' && (gamemap[i+1][j]=='o')){
+                    gamemap[i+1][j]==gamemap[i][j];
+                    gamemap[i][j]='o';
+                }
             }
-        }
-        if(temp==3){        //κίνηση δεξιά
-            if(j==y){
-                break;
-            }
-            else if(map[i][j+1]=='e' && (gamemap[i][j+1]=='o')){
-                gamemap[i][j+1]==gamemap[i][j];
-                gamemap[i][j]='o';
-            }
-        }
-        if(temp==4){        //κίνηση κάτω
-            if(i==x){
-                break;
-            }
-            else if(map[i+1][j]=='e' && (gamemap[i+1][j]=='o')){
-                gamemap[i+1][j]==gamemap[i][j];
-                gamemap[i][j]='o';
-            }
-        }
     }
 
-    }
+}
 
     private:
         int x_,y_;
 };
 
 
-//keep playing or quit the game class 
-void game(){
+//keep playing or quit the game 
+void endgame(){
     cout<<"Do you want to keep playing?(Y/N)"<<endl;
     char input;
     cin>>input;
@@ -250,7 +259,7 @@ int main(){
     //time_t ti = time(NULL);
     char ch;
 
-    cout<<"Choose two possitive numbers for the map[x.y]\n";
+    cout<<"Choose two possitive numbers for the map[x y]\n";
     cin>>x>>y;
     char map[x][y];
     char gamemap[x][y];
@@ -335,6 +344,7 @@ int main(){
         }
     }
     vampires=maxplayers;
+    int countV=0;
     while(vampires){        //τοποθετούμε το V σε τυχαία θέση στον χάρτη
         for(i=0; i<x; i++){
             for(j=0; j<y; j++){
@@ -343,11 +353,13 @@ int main(){
                 if(((i+j)==temp) && (vampires!=0) && (map[i][j]=='e')){
                     gamemap[i][j]='V'; 
                     vampires--;
+                    countV++;
                 }
             }
         }
     }
     werewolfs=maxplayers;
+    int countW=0;
     while(werewolfs){       //τοποθετούμε το W σε τυχαία θέση στον χάρτη
         for(i=0; i<x; i++){
             for(j=0; j<y; j++){
@@ -356,6 +368,7 @@ int main(){
                 if(((i+j)==temp) && (werewolfs!=0) && (map[i][j]=='e')){
                     gamemap[i][j]='W';
                     werewolfs--;
+                    countW++;
                 }
             }
         }
@@ -392,7 +405,8 @@ int main(){
     obj2.Start();
     Avatar obj;
     obj.Start();
-while(true){
+
+while(1){
     obj.move();
     obj1.move();
     obj2.move();     
@@ -407,12 +421,23 @@ while(true){
         }
         cout<<"\n";
     }
-    // Alternate between day and night
-    static bool is_day = true;
-    is_day = !is_day;
-
+    int counter=0;      //DAY NIGHT COUNTER
+    if(counter < 10) {   //day
+        counter++;
+        } 
+    else {
+        if (counter=20){   //night
+            counter=0;
+        }
+        counter++;
+    }
+    
+    if(countV==0 || countW==0){
+        break;
+    }
+    
 }
-    game();
+    endgame();
 
     return 0;
 }
