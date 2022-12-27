@@ -74,7 +74,7 @@ public:
 };
 
 //class vampire
-class vampire{
+class Vampire{
     public:
     int x,y,i,j,health,power,filter,defence;
     char** map;
@@ -175,8 +175,8 @@ class vampire{
 };
 
 
-//class werewolf
-class werewolf{
+//class werewolves
+class Werewolves{
     public:
         int x,y,i,j,health,power,filter,defence;
         char** map;
@@ -254,7 +254,7 @@ void endgame(){
 }
 
 int main(){
-    int x, y, i, j, maxplayers, earth, water, tree, current, temp, vampires, werewolfs, filter;
+    int x, y, i, j, maxplayers, earth, water, tree, current, temp, vampires, werewolves, filter;
     long curtime;
     //time_t ti = time(NULL);
     char ch;
@@ -358,16 +358,16 @@ int main(){
             }
         }
     }
-    werewolfs=maxplayers;
+    werewolves=maxplayers;
     int countW=0;
-    while(werewolfs){       //τοποθετούμε το W σε τυχαία θέση στον χάρτη
+    while(werewolves){       //τοποθετούμε το W σε τυχαία θέση στον χάρτη
         for(i=0; i<x; i++){
             for(j=0; j<y; j++){
                 current=rand();
                 temp=current%(x+y);
-                if(((i+j)==temp) && (werewolfs!=0) && (map[i][j]=='e')){
+                if(((i+j)==temp) && (werewolves!=0) && (map[i][j]=='e')){
                     gamemap[i][j]='W';
-                    werewolfs--;
+                    werewolves--;
                     countW++;
                 }
             }
@@ -399,12 +399,13 @@ int main(){
         cout<<"\n";
     }
 
-    werewolf obj1;
+    Werewolves obj1;
     obj1.Start();
-    vampire obj2;
+    Vampire obj2;
     obj2.Start();
     Avatar obj;
     obj.Start();
+    
 
 while(1){
     obj.move();
